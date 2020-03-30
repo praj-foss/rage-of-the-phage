@@ -2,39 +2,33 @@ package io.chakragames.rotp;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
 
 public final class Assets implements Disposable {
 
-    private Texture phageTexture;
-    private Texture virus1Texture;
-    private Texture virus2Texture;
-    private Texture virus3Texture;
+    private TextureRegion phageTexture;
+    private TextureRegion virusTexture;
 
     Assets() {
     }
 
     void load() {
-        phageTexture = new Texture(Gdx.files.internal("Phage.png"));
-        virus1Texture = new Texture(Gdx.files.internal("Virus-1.png"));
-        virus2Texture = new Texture(Gdx.files.internal("Virus-2.png"));
-        virus3Texture = new Texture(Gdx.files.internal("Virus-3.png"));
+        Texture t1 = new Texture(Gdx.files.internal("Phage.png"));
+        t1.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+        phageTexture = new TextureRegion(t1);
+
+        Texture t2 = new Texture(Gdx.files.internal("Virus-1.png"));
+        t2.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+        virusTexture = new TextureRegion(t2);
     }
 
-    public Texture getPhageTexture() {
+    public TextureRegion getPhageTexture() {
         return phageTexture;
     }
 
-    public Texture getVirus1Texture() {
-        return virus1Texture;
-    }
-
-    public Texture getVirus2Texture() {
-        return virus2Texture;
-    }
-
-    public Texture getVirus3Texture() {
-        return virus3Texture;
+    public TextureRegion getVirusTexture() {
+        return virusTexture;
     }
 
     @Override

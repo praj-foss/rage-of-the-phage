@@ -5,21 +5,25 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
 
 import io.chakragames.rotp.Assets;
+import io.chakragames.rotp.models.Enemy;
 import io.chakragames.rotp.models.Player;
 
 public class GameWorld {
+    private final float width;
+    private final float height;
     private final Player player;
+    private final Enemy enemy;
 
     public GameWorld(Assets assets) {
-        player = new Player(assets);
+        width = 360;
+        height = 640;
+        player = new Player(assets, width, height);
+        enemy = new Enemy(assets, width, height);
     }
 
     public void update(float delta) {
         player.update(delta);
-    }
-
-    Player getPlayer() {
-        return player;
+        enemy.update(delta);
     }
 
     private final InputProcessor inputProcessor = new InputAdapter() {
@@ -49,6 +53,22 @@ public class GameWorld {
             return true;
         }
     };
+
+    Player getPlayer() {
+        return player;
+    }
+
+    Enemy getEnemy() {
+        return enemy;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
 
     public InputProcessor getInputProcessor() {
         return inputProcessor;
