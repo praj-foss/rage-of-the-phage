@@ -9,11 +9,14 @@ import io.chakragames.rotp.models.Player;
 public class GameRenderer {
 
     private final GameWorld world;
+    private final StatusDisplay hud;
     private final OrthographicCamera cam;
     private final SpriteBatch batch;
 
-    public GameRenderer(GameWorld world) {
+    public GameRenderer(GameWorld world, StatusDisplay hud) {
         this.world = world;
+        this.hud = hud;
+
         cam = new OrthographicCamera();
         cam.setToOrtho(true, world.getWidth(), world.getHeight());
         batch = new SpriteBatch();
@@ -30,5 +33,8 @@ public class GameRenderer {
         final Player p = world.getPlayer();
         batch.draw(p.getTexture(), p.getX(), p.getY());
         batch.end();
+
+        // Draw HUD
+        hud.render();
     }
 }

@@ -2,11 +2,10 @@ package io.chakragames.rotp.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -25,15 +24,10 @@ public class MenuScreen extends ScreenAdapter {
 
     private void createUI() {
         // Font and style
-        final FreeTypeFontGenerator.FreeTypeFontParameter param =
-                new FreeTypeFontGenerator.FreeTypeFontParameter();
-        param.size = 16;
-        final TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = game.getAssets().getFontGenerator().generateFont(param);
-        style.fontColor = Color.WHITE;
+        final Skin skin = game.getAssets().getSkin();
 
         // Play button
-        final TextButton btnPlay = new TextButton("Play", style);
+        final TextButton btnPlay = new TextButton("Play", skin);
         btnPlay.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -42,7 +36,7 @@ public class MenuScreen extends ScreenAdapter {
         });
 
         // Settings button
-        final TextButton btnSettings = new TextButton("Settings", style);
+        final TextButton btnSettings = new TextButton("Settings", skin);
         btnSettings.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -51,7 +45,7 @@ public class MenuScreen extends ScreenAdapter {
         });
 
         // Exit button
-        final TextButton btnExit = new TextButton("Exit", style);
+        final TextButton btnExit = new TextButton("Exit", skin);
         btnExit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -69,7 +63,7 @@ public class MenuScreen extends ScreenAdapter {
         root.addActor(btnExit);
 
         stage.addActor(root);
-        stage.setDebugAll(true);
+//        stage.setDebugAll(true);
     }
 
     @Override
