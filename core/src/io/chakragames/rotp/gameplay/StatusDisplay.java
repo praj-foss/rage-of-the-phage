@@ -22,9 +22,9 @@ public class StatusDisplay {
         table.top();
 
         // Upper UI
-        table.add("H").colspan(2);
-        table.add("W").expandX();
-        table.add("S").colspan(2);
+        table.add("CASH").colspan(2);
+        table.add("WAVE").expandX();
+        table.add("BACK").colspan(2);
         table.row();
 
         // Middle space
@@ -34,7 +34,7 @@ public class StatusDisplay {
         // Lower UI
         table.add("L").size(30);
         table.add("R").size(30);
-        table.add().expandX();
+        table.add("HEALTH").expandX();
         table.add("F").size(30);
         table.add("M").size(30);
 
