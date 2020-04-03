@@ -19,7 +19,7 @@ public final class Assets {
         t1.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         phageTexture = new TextureRegion(t1);
 
-        Texture t2 = new Texture(Gdx.files.internal("Virus-1.png"));
+        Texture t2 = new Texture(Gdx.files.internal("Zika.png"));
         t2.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         virusTexture = new TextureRegion(t2);
 

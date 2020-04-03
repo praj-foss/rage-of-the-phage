@@ -7,25 +7,30 @@ import com.badlogic.gdx.InputProcessor;
 
 import io.chakragames.rotp.Assets;
 import io.chakragames.rotp.entities.PlayerEntity;
-import io.chakragames.rotp.system.ControlledMovementSystem;
+import io.chakragames.rotp.entities.VirusEntity;
+import io.chakragames.rotp.system.MovementInputSystem;
+import io.chakragames.rotp.system.MovementSystem;
 import io.chakragames.rotp.system.RenderingSystem;
 
 public class GameWorld {
     private final float width;
     private final float height;
     private final Engine engine;
-    private final ControlledMovementSystem movementSystem;
+    private final MovementInputSystem movementSystem;
 
     public GameWorld(Assets assets) {
         width = 360;
         height = 640;
 
-        movementSystem = new ControlledMovementSystem();
+        movementSystem = new MovementInputSystem();
 
         engine = new Engine();
+        engine.addSystem(new MovementSystem());
         engine.addSystem(movementSystem);
         engine.addSystem(new RenderingSystem(this));
+
         engine.addEntity(new PlayerEntity(assets, width, height));
+        engine.addEntity(new VirusEntity(assets, width, height));
     }
 
     public void update(float delta) {

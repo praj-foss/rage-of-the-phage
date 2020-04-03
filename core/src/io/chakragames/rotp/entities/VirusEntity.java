@@ -7,15 +7,13 @@ import io.chakragames.rotp.Assets;
 import io.chakragames.rotp.components.PositionComponent;
 import io.chakragames.rotp.components.TextureComponent;
 import io.chakragames.rotp.components.VelocityComponent;
-import io.chakragames.rotp.components.VelocityInputComponent;
 
-public final class PlayerEntity extends Entity {
-    public PlayerEntity(Assets assets, float worldWidth, float worldHeight) {
-        TextureRegion region = assets.getPhageTexture();
+public final class VirusEntity extends Entity {
+    public VirusEntity(Assets assets, float worldWidth, float worldHeight) {
+        TextureRegion region = assets.getVirusTexture();
 
         add(new TextureComponent(region));
-        add(new PositionComponent(0, 0));
-        add(new VelocityComponent(0, 0));
-        add(new VelocityInputComponent(200));
+        add(new PositionComponent((worldWidth - region.getRegionWidth()) / 2, worldHeight));
+        add(new VelocityComponent(0, -100));
     }
 }
