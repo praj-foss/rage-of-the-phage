@@ -1,10 +1,9 @@
-package io.chakragames.rotp;
+package in.praj.rotp;
 
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import io.chakragames.rotp.MainGame;
 
 public class AndroidLauncher extends AndroidApplication {
     @Override

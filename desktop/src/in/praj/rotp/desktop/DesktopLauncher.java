@@ -1,8 +1,9 @@
-package io.chakragames.rotp.desktop;
+package in.praj.rotp.desktop;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import io.chakragames.rotp.MainGame;
+
+import in.praj.rotp.MainGame;
 
 public class DesktopLauncher {
     public static void main (String[] arg) {
