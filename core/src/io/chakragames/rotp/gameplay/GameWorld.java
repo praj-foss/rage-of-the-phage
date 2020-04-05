@@ -19,10 +19,10 @@ public class GameWorld {
     private final MovementInputSystem movementSystem;
 
     public GameWorld(Assets assets) {
-        width = 360;
-        height = 640;
+        width = 288;
+        height = 512;
 
-        movementSystem = new MovementInputSystem();
+        movementSystem = new MovementInputSystem(assets);
 
         engine = new Engine();
         engine.addSystem(new MovementSystem());
