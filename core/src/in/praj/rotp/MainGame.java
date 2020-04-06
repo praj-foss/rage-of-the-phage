@@ -13,7 +13,7 @@ public final class MainGame extends Game {
     public void create() {
         assets = new Assets();
         screens = new Screens(this, assets);
-        screens.showSplash();
+        screens.showMenu();
     }
 
     @Override
