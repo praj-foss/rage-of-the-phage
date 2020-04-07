@@ -1,4 +1,4 @@
-package in.praj.rotp.about;
+package in.praj.rotp.career;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -10,8 +10,8 @@ import in.praj.rotp.core.Screens;
 import in.praj.rotp.util.Tab;
 import in.praj.rotp.util.TabPane;
 
-public final class AboutScreen extends AbstractScreen {
-    public AboutScreen(Screens screens, Assets assets) {
+public final class CareerScreen extends AbstractScreen {
+    public CareerScreen(Screens screens, Assets assets) {
         super(screens, assets);
     }
 
@@ -31,18 +31,23 @@ public final class AboutScreen extends AbstractScreen {
                 .skin(skin)
                 .tab(Tab.builder()
                         .skin(skin)
-                        .head("Team")
-                        .body(new Label("Priyadarshi Raj\nPulak Das\nSonya Okolelova", skin))
+                        .head("Score")
+                        .body(new Label("Overview and scores", skin))
                         .build())
                 .tab(Tab.builder()
                         .skin(skin)
-                        .head("Licenses")
-                        .body(new Label("License texts go here", skin))
+                        .head("Medal")
+                        .body(new Label("Achievements and stuff", skin))
+                        .build())
+                .tab(Tab.builder()
+                        .skin(skin)
+                        .head("Journal")
+                        .body(new Label("Info about the germs", skin))
                         .build())
                 .build().on(root);
 
         root.row();
-        root.add(createButton("Back", screens::goBack)).colspan(2);
+        root.add(createButton("Back", screens::goBack)).colspan(3);
 
         return stage;
     }

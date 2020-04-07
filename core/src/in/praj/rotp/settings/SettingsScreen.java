@@ -1,4 +1,4 @@
-package in.praj.rotp.about;
+package in.praj.rotp.settings;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -10,8 +10,8 @@ import in.praj.rotp.core.Screens;
 import in.praj.rotp.util.Tab;
 import in.praj.rotp.util.TabPane;
 
-public final class AboutScreen extends AbstractScreen {
-    public AboutScreen(Screens screens, Assets assets) {
+public final class SettingsScreen extends AbstractScreen {
+    public SettingsScreen(Screens screens, Assets assets) {
         super(screens, assets);
     }
 
@@ -31,13 +31,13 @@ public final class AboutScreen extends AbstractScreen {
                 .skin(skin)
                 .tab(Tab.builder()
                         .skin(skin)
-                        .head("Team")
-                        .body(new Label("Priyadarshi Raj\nPulak Das\nSonya Okolelova", skin))
+                        .head("Game")
+                        .body(new Label("Gameplay settings here", skin))
                         .build())
                 .tab(Tab.builder()
                         .skin(skin)
-                        .head("Licenses")
-                        .body(new Label("License texts go here", skin))
+                        .head("Acc")
+                        .body(new Label("Account preferences here", skin))
                         .build())
                 .build().on(root);
 

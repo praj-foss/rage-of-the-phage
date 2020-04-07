@@ -12,8 +12,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.Stack;
 
 import in.praj.rotp.about.AboutScreen;
+import in.praj.rotp.career.CareerScreen;
 import in.praj.rotp.menu.MenuScreen;
 import in.praj.rotp.menu.SplashScreen;
+import in.praj.rotp.settings.SettingsScreen;
+import in.praj.rotp.store.StoreScreen;
 
 /**
  * Provides functionality to switch between screens.
@@ -29,6 +32,9 @@ public final class Screens implements Disposable {
     private final Stack<Screen> history;
     private final Screen splashScreen;
     private final Screen menuScreen;
+    private final Screen storeScreen;
+    private final Screen careerScreen;
+    private final Screen settingsScreen;
     private final Screen aboutScreen;
 
     public Screens(Game game, Assets assets) {
@@ -39,6 +45,9 @@ public final class Screens implements Disposable {
         history = new Stack<>();
         splashScreen = new SplashScreen(this, assets);
         menuScreen = new MenuScreen(this, assets);
+        storeScreen = new StoreScreen(this, assets);
+        careerScreen = new CareerScreen(this, assets);
+        settingsScreen = new SettingsScreen(this, assets);
         aboutScreen = new AboutScreen(this, assets);
     }
 
@@ -49,7 +58,7 @@ public final class Screens implements Disposable {
 
     public void showMenu() {
         Gdx.app.log(TAG, "Opening Menu screen");
-        showScreen(menuScreen);
+        game.setScreen(menuScreen);
     }
 
     public void showGameplay() {
@@ -58,14 +67,17 @@ public final class Screens implements Disposable {
 
     public void showStore() {
         Gdx.app.log(TAG, "Opening Store screen");
+        showScreen(storeScreen);
     }
 
     public void showCareer() {
         Gdx.app.log(TAG, "Opening Career screen");
+        showScreen(careerScreen);
     }
 
     public void showSettings() {
         Gdx.app.log(TAG, "Opening Settings screen");
+        showScreen(settingsScreen);
     }
 
     public void showAbout() {
@@ -87,7 +99,7 @@ public final class Screens implements Disposable {
         }
     }
 
-    public void clear() {
+    void clear() {
         Gdx.gl20.glClearColor(0, 0, 0, 0);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
@@ -104,6 +116,9 @@ public final class Screens implements Disposable {
     public void dispose() {
         splashScreen.dispose();
         menuScreen.dispose();
+        storeScreen.dispose();
+        careerScreen.dispose();
+        settingsScreen.dispose();
         aboutScreen.dispose();
         spriteBatch.dispose();
     }
