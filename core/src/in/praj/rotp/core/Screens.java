@@ -3,11 +3,13 @@ package in.praj.rotp.core;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import in.praj.rotp.about.AboutScreen;
 import in.praj.rotp.menu.MenuScreen;
 import in.praj.rotp.menu.SplashScreen;
 
@@ -25,6 +27,7 @@ public final class Screens implements Disposable {
     // Available screens
     private final Screen splashScreen;
     private final Screen menuScreen;
+    private final Screen aboutScreen;
 
     public Screens(Game game, Assets assets) {
         this.game = game;
@@ -34,6 +37,7 @@ public final class Screens implements Disposable {
 
         splashScreen = new SplashScreen(this, assets);
         menuScreen = new MenuScreen(this, assets);
+        aboutScreen = new AboutScreen(this, assets);
     }
 
     public void showSplash() {
@@ -64,11 +68,17 @@ public final class Screens implements Disposable {
 
     public void showAbout() {
         Gdx.app.log(TAG, "Opening About screen");
+        game.setScreen(aboutScreen);
     }
 
     public void exit() {
         Gdx.app.log(TAG, "Exiting app");
         Gdx.app.exit();
+    }
+
+    public void clear() {
+        Gdx.gl20.glClearColor(0, 0, 0, 0);
+        Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
     public SpriteBatch getSpriteBatch() {

@@ -1,10 +1,12 @@
-package in.praj.rotp.menu;
+package in.praj.rotp.about;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -13,13 +15,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import in.praj.rotp.core.Assets;
 import in.praj.rotp.core.Screens;
 
-public final class MenuScreen extends ScreenAdapter {
+public final class AboutScreen extends ScreenAdapter {
     private final Screens screens;
     private final SpriteBatch batch;
     private final Skin skin;
     private final Stage stage;
 
-    public MenuScreen(Screens screens, Assets assets) {
+    public AboutScreen(Screens screens, Assets assets) {
         this.screens = screens;
         batch = screens.getSpriteBatch();
         skin = assets.getSkin();
@@ -30,22 +32,29 @@ public final class MenuScreen extends ScreenAdapter {
         final Stage stage = new Stage(screens.getViewport(), batch);
 
         // Root container
-        final Table table = new Table(skin);
-        table.setFillParent(true);
-        table.pad(100);
-        table.defaults()
+        final Table root = new Table(skin);
+        root.setFillParent(true);
+        root.defaults()
                 .expandX()
-                .fillX()
-                .spaceBottom(10);
-        stage.addActor(table);
+                .fillX();
+        root.pad(50);
+        root.debug();
+        stage.addActor(root);
 
-        // Menu items
-        table.add(createButton("Play", screens::showGameplay)).row();
-        table.add(createButton("Store", screens::showStore)).row();
-        table.add(createButton("Career", screens::showCareer)).row();
-        table.add(createButton("Settings", screens::showSettings)).row();
-        table.add(createButton("About", screens::showAbout)).row();
-        table.add(createButton("Exit", screens::exit)).row();
+        final ScrollPane content = new ScrollPane(null, skin);
+        content.setScrollingDisabled(true, false);
+        content.setHeight(200);
+
+        // Tabs and contents
+        final Label textTeam = new Label("Team text goes here", skin);
+        final Label textCredits = new Label("Credits text goes here", skin);
+
+        root.add(
+                createButton("Team", () -> content.setActor(textTeam)),
+                createButton("Credits", () -> content.setActor(textCredits)));
+        root.row();
+        root.add(content).colspan(2);
+        content.setActor(textTeam);
 
         return stage;
     }
@@ -64,6 +73,7 @@ public final class MenuScreen extends ScreenAdapter {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
+
     }
 
     @Override
@@ -75,6 +85,6 @@ public final class MenuScreen extends ScreenAdapter {
 
     @Override
     public void dispose() {
-        super.dispose();
+        stage.dispose();
     }
 }

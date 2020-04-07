@@ -23,5 +23,6 @@ public final class Assets implements Disposable {
 
     @Override
     public void dispose() {
+        skin.dispose();
     }
 }
