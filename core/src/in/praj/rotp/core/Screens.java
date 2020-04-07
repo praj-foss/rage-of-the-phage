@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.Stack;
+
 import in.praj.rotp.about.AboutScreen;
 import in.praj.rotp.menu.MenuScreen;
 import in.praj.rotp.menu.SplashScreen;
@@ -20,21 +22,21 @@ public final class Screens implements Disposable {
     private static final String TAG = Screens.class.getName();
 
     private final Game game;
-    private final Assets assets;
     private final SpriteBatch spriteBatch;
     private final Viewport viewport;
 
     // Available screens
+    private final Stack<Screen> history;
     private final Screen splashScreen;
     private final Screen menuScreen;
     private final Screen aboutScreen;
 
     public Screens(Game game, Assets assets) {
         this.game = game;
-        this.assets = assets;
         spriteBatch = new SpriteBatch();
         viewport = new FitViewport(288, 512);
 
+        history = new Stack<>();
         splashScreen = new SplashScreen(this, assets);
         menuScreen = new MenuScreen(this, assets);
         aboutScreen = new AboutScreen(this, assets);
@@ -47,7 +49,7 @@ public final class Screens implements Disposable {
 
     public void showMenu() {
         Gdx.app.log(TAG, "Opening Menu screen");
-        game.setScreen(menuScreen);
+        showScreen(menuScreen);
     }
 
     public void showGameplay() {
@@ -68,12 +70,21 @@ public final class Screens implements Disposable {
 
     public void showAbout() {
         Gdx.app.log(TAG, "Opening About screen");
-        game.setScreen(aboutScreen);
+        showScreen(aboutScreen);
     }
 
-    public void exit() {
-        Gdx.app.log(TAG, "Exiting app");
-        Gdx.app.exit();
+    private void showScreen(Screen screen) {
+        history.push(game.getScreen());
+        game.setScreen(screen);
+    }
+
+    public void goBack() {
+        if (!history.empty())
+            game.setScreen(history.pop());
+        else {
+            Gdx.app.log(TAG, "Exiting app");
+            Gdx.app.exit();
+        }
     }
 
     public void clear() {
@@ -92,6 +103,8 @@ public final class Screens implements Disposable {
     @Override
     public void dispose() {
         splashScreen.dispose();
+        menuScreen.dispose();
+        aboutScreen.dispose();
         spriteBatch.dispose();
     }
 }

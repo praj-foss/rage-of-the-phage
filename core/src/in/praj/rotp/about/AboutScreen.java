@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -14,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import in.praj.rotp.core.Assets;
 import in.praj.rotp.core.Screens;
+import in.praj.rotp.util.Tab;
+import in.praj.rotp.util.TabPane;
 
 public final class AboutScreen extends ScreenAdapter {
     private final Screens screens;
@@ -34,27 +35,28 @@ public final class AboutScreen extends ScreenAdapter {
         // Root container
         final Table root = new Table(skin);
         root.setFillParent(true);
-        root.defaults()
-                .expandX()
-                .fillX();
+        root.defaults().expandX();
         root.pad(50);
         root.debug();
         stage.addActor(root);
 
-        final ScrollPane content = new ScrollPane(null, skin);
-        content.setScrollingDisabled(true, false);
-        content.setHeight(200);
-
         // Tabs and contents
-        final Label textTeam = new Label("Team text goes here", skin);
-        final Label textCredits = new Label("Credits text goes here", skin);
+        TabPane.builder()
+                .skin(skin)
+                .tab(Tab.builder()
+                        .skin(skin)
+                        .head("Team")
+                        .body(new Label("Team texts go here", skin))
+                        .build())
+                .tab(Tab.builder()
+                        .skin(skin)
+                        .head("Licenses")
+                        .body(new Label("License texts go here", skin))
+                        .build())
+                .build().on(root);
 
-        root.add(
-                createButton("Team", () -> content.setActor(textTeam)),
-                createButton("Credits", () -> content.setActor(textCredits)));
         root.row();
-        root.add(content).colspan(2);
-        content.setActor(textTeam);
+        root.add(createButton("Back", screens::goBack)).colspan(2);
 
         return stage;
     }
@@ -73,7 +75,6 @@ public final class AboutScreen extends ScreenAdapter {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
-
     }
 
     @Override

@@ -45,7 +45,7 @@ public final class MenuScreen extends ScreenAdapter {
         table.add(createButton("Career", screens::showCareer)).row();
         table.add(createButton("Settings", screens::showSettings)).row();
         table.add(createButton("About", screens::showAbout)).row();
-        table.add(createButton("Exit", screens::exit)).row();
+        table.add(createButton("Exit", screens::goBack)).row();
 
         return stage;
     }
