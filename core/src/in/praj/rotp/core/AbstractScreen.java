@@ -41,6 +41,11 @@ public abstract class AbstractScreen extends ScreenAdapter {
     }
 
     @Override
+    public void resize(int width, int height) {
+        screens.getViewport().update(width, height);
+    }
+
+    @Override
     public void render(float delta) {
         screens.clear();
         stage.act(delta);

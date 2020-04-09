@@ -17,22 +17,22 @@ public final class MenuScreen extends AbstractScreen {
         final Stage stage = new Stage(screens.getViewport(), batch);
 
         // Root container
-        final Table table = new Table(skin);
-        table.setFillParent(true);
-        table.pad(100).debug();
-        table.defaults()
+        final Table root = new Table(skin);
+        root.setFillParent(true);
+        root.pad(100).debug();
+        root.defaults()
                 .expandX()
                 .fillX()
                 .spaceBottom(10);
-        stage.addActor(table);
+        stage.addActor(root);
 
         // Menu items
-        table.add(createButton("Play", screens::showGameplay)).row();
-        table.add(createButton("Store", screens::showStore)).row();
-        table.add(createButton("Career", screens::showCareer)).row();
-        table.add(createButton("Settings", screens::showSettings)).row();
-        table.add(createButton("About", screens::showAbout)).row();
-        table.add(createButton("Exit", screens::goBack)).row();
+        root.add(createButton("Play", screens::showGameplay)).row();
+        root.add(createButton("Store", screens::showStore)).row();
+        root.add(createButton("Career", screens::showCareer)).row();
+        root.add(createButton("Settings", screens::showSettings)).row();
+        root.add(createButton("About", screens::showAbout)).row();
+        root.add(createButton("Exit", screens::goBack)).row();
 
         return stage;
     }

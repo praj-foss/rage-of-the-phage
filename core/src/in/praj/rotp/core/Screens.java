@@ -13,6 +13,7 @@ import java.util.Stack;
 
 import in.praj.rotp.about.AboutScreen;
 import in.praj.rotp.career.CareerScreen;
+import in.praj.rotp.gameplay.GameplayScreen;
 import in.praj.rotp.menu.MenuScreen;
 import in.praj.rotp.menu.SplashScreen;
 import in.praj.rotp.settings.SettingsScreen;
@@ -32,6 +33,7 @@ public final class Screens implements Disposable {
     private final Stack<Screen> history;
     private final Screen splashScreen;
     private final Screen menuScreen;
+    private final Screen gameplayScreen;
     private final Screen storeScreen;
     private final Screen careerScreen;
     private final Screen settingsScreen;
@@ -45,6 +47,7 @@ public final class Screens implements Disposable {
         history = new Stack<>();
         splashScreen = new SplashScreen(this, assets);
         menuScreen = new MenuScreen(this, assets);
+        gameplayScreen = new GameplayScreen(this, assets);
         storeScreen = new StoreScreen(this, assets);
         careerScreen = new CareerScreen(this, assets);
         settingsScreen = new SettingsScreen(this, assets);
@@ -63,6 +66,7 @@ public final class Screens implements Disposable {
 
     public void showGameplay() {
         Gdx.app.log(TAG, "Opening Gameplay screen");
+        showScreen(gameplayScreen);
     }
 
     public void showStore() {
@@ -116,6 +120,7 @@ public final class Screens implements Disposable {
     public void dispose() {
         splashScreen.dispose();
         menuScreen.dispose();
+        gameplayScreen.dispose();
         storeScreen.dispose();
         careerScreen.dispose();
         settingsScreen.dispose();
