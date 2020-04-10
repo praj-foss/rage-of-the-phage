@@ -16,7 +16,7 @@ public final class GameplayScreen extends AbstractScreen {
 
     public GameplayScreen(Screens screens, Assets assets) {
         super(screens, assets);
-        level = new Level(assets, batch);
+        level = new Level(assets, batch, screens.getViewport());
     }
 
     @Override

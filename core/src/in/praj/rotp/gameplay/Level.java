@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import in.praj.rotp.gameplay.components.MovementInputComponent;
 import in.praj.rotp.gameplay.components.PositionComponent;
 import in.praj.rotp.gameplay.components.TextureComponent;
 import in.praj.rotp.gameplay.components.VelocityComponent;
+import in.praj.rotp.gameplay.systems.BulletSystem;
 import in.praj.rotp.gameplay.systems.MovementInputSystem;
 import in.praj.rotp.gameplay.systems.MovementSystem;
 import in.praj.rotp.gameplay.systems.RenderingSystem;
@@ -21,20 +23,30 @@ final class Level {
     private final Assets assets;
     private final PooledEngine engine;
 
+    // Entities
+    private final Entity player;
+
     // Systems
     private final MovementInputSystem movementInput;
+    private final BulletSystem bulletSystem;
     private final List<EntitySystem> systems;
 
-    Level(Assets assets, SpriteBatch batch) {
+    Level(Assets assets, SpriteBatch batch, Viewport viewport) {
         this.assets = assets;
         engine = new PooledEngine();
 
+        // Entities
+        player = engine.createEntity();
+
         // Systems
-        movementInput = new MovementInputSystem();
+        movementInput = new MovementInputSystem(player);
+        bulletSystem = new BulletSystem(assets.getBulletTexture(), player);
+
         systems = new ArrayList<>(3);
         systems.add(movementInput);
+        systems.add(bulletSystem);
         systems.add(new MovementSystem());
-        systems.add(new RenderingSystem(batch));
+        systems.add(new RenderingSystem(batch, viewport));
     }
 
     void start() {
@@ -42,9 +54,7 @@ final class Level {
         for (EntitySystem s : systems)
             engine.addSystem(s);
 
-        // Player
-        final Entity player = engine.createEntity();
-
+        // Player components
         final TextureComponent tc = engine.createComponent(TextureComponent.class);
         tc.region = assets.getPlayerTexture();
         player.add(tc);
@@ -85,5 +95,6 @@ final class Level {
         for (EntitySystem s : systems)
             engine.removeSystem(s);
         engine.removeAllEntities();
+        engine.clearPools();
     }
 }
