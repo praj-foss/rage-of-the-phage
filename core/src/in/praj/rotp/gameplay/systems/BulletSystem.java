@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import in.praj.rotp.gameplay.components.PhysicsComponent;
 import in.praj.rotp.gameplay.components.PositionComponent;
 import in.praj.rotp.gameplay.components.TextureComponent;
 import in.praj.rotp.gameplay.components.VelocityComponent;
@@ -58,6 +59,10 @@ public final class BulletSystem extends EntitySystem {
         pc.x = x;
         pc.y = y;
         bullet.add(pc);
+
+        final PhysicsComponent phc = engine.createComponent(PhysicsComponent.class);
+        phc.circle.set(4, 4, 3);
+        bullet.add(phc);
 
         final VelocityComponent vc = engine.createComponent(VelocityComponent.class);
         vc.y = speed;

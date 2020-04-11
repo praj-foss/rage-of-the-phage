@@ -5,10 +5,11 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import java.util.Random;
-
+import in.praj.rotp.gameplay.components.HealthComponent;
+import in.praj.rotp.gameplay.components.PhysicsComponent;
 import in.praj.rotp.gameplay.components.PositionComponent;
 import in.praj.rotp.gameplay.components.TextureComponent;
 import in.praj.rotp.gameplay.components.VelocityComponent;
@@ -22,7 +23,6 @@ public final class MobSystem extends EntitySystem {
     private float spawnInterval;
     private float timePast;
     private float baseSpeed;
-    private final Random random;
 
     public MobSystem(TextureRegion region, Viewport viewport) {
         super(0);
@@ -33,7 +33,6 @@ public final class MobSystem extends EntitySystem {
         spawnInterval = 1.5f;
         timePast = 0f;
         baseSpeed = 100f;
-        random = new Random();
     }
 
     @Override
@@ -45,9 +44,9 @@ public final class MobSystem extends EntitySystem {
     public void update(float deltaTime) {
         timePast += deltaTime;
         if (timePast >= spawnInterval) {
-            float x = random.nextFloat() * (xBound - region.getRegionWidth() + 1);
+            float x = MathUtils.random() * (xBound - region.getRegionWidth() + 1);
             float y = yBound;
-            float speed = baseSpeed + random.nextInt(100);
+            float speed = baseSpeed + MathUtils.random(100);
 
             engine.addEntity(spawn(x, y, speed));
             timePast = 0f;
@@ -66,9 +65,17 @@ public final class MobSystem extends EntitySystem {
         pc.y = y;
         mob.add(pc);
 
+        final PhysicsComponent phc = engine.createComponent(PhysicsComponent.class);
+        phc.circle.set(24, 24, 24);
+        mob.add(phc);
+
         final VelocityComponent vc = engine.createComponent(VelocityComponent.class);
         vc.y = -speed;
         mob.add(vc);
+
+        final HealthComponent hc = engine.createComponent(HealthComponent.class);
+        hc.value = 1;
+        mob.add(hc);
 
         return mob;
     }

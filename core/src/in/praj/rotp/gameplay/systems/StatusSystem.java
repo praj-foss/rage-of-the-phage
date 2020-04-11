@@ -15,7 +15,6 @@ public final class StatusSystem extends EntitySystem {
     private final Entity player;
     private final ComponentMapper<HealthComponent> hcm;
 
-    private int hh;
     private int mm;
     private float ss;
     private int health;
@@ -36,12 +35,7 @@ public final class StatusSystem extends EntitySystem {
             mm += 1;
         }
 
-        if (mm >= 60) {
-            mm -= 60;
-            hh += 1;
-        }
-
-        level.updateScore(String.format(Locale.US,"%02d:%02d:%04.1f", hh, mm, ss));
+        level.updateScore(String.format(Locale.US,"%d:%04.1f", mm, ss));
 
         int currentHealth = hcm.get(player).value;
         if (health != currentHealth) {
@@ -52,7 +46,6 @@ public final class StatusSystem extends EntitySystem {
 
     @Override
     public void removedFromEngine(Engine engine) {
-        hh = 0;
         mm = 0;
         ss = 0;
         health = 0;
