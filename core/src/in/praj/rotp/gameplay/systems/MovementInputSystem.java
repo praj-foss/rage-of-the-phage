@@ -16,6 +16,7 @@ public final class MovementInputSystem extends EntitySystem {
     private boolean moveRight;
 
     public MovementInputSystem(Entity player) {
+        super(1);
         this.player = player;
         vcm = ComponentMapper.getFor(VelocityComponent.class);
         micm = ComponentMapper.getFor(MovementInputComponent.class);

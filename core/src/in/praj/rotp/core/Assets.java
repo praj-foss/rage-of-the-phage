@@ -10,13 +10,14 @@ public final class Assets implements Disposable {
     private final Skin skin;
     private final TextureRegion playerTexture;
     private final TextureRegion bulletTexture;
+    private final TextureRegion virusTexture;
 
     public Assets() {
         skin = new Skin(Gdx.files.internal("skins/shade/uiskin.json"));
 
         playerTexture = new TextureRegion(new Texture(Gdx.files.internal("Phage-idle.png")));
-
         bulletTexture = new TextureRegion(new Texture(Gdx.files.internal("type-1.png")));
+        virusTexture = new TextureRegion(new Texture(Gdx.files.internal("Zika.png")));
     }
 
     public TextureRegion getSplashImage() {
@@ -32,6 +33,10 @@ public final class Assets implements Disposable {
         return bulletTexture;
     }
 
+    public TextureRegion getVirusTexture() {
+        return virusTexture;
+    }
+
     public Skin getSkin() {
         return skin;
     }
@@ -41,5 +46,6 @@ public final class Assets implements Disposable {
         skin.dispose();
         playerTexture.getTexture().dispose();
         bulletTexture.getTexture().dispose();
+        virusTexture.getTexture().dispose();
     }
 }

@@ -1,35 +1,39 @@
 package in.praj.rotp.gameplay.systems;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.util.Random;
 
 import in.praj.rotp.gameplay.components.PositionComponent;
 import in.praj.rotp.gameplay.components.TextureComponent;
 import in.praj.rotp.gameplay.components.VelocityComponent;
 
-public final class BulletSystem extends EntitySystem {
+public final class MobSystem extends EntitySystem {
     private final TextureRegion region;
-    private final Entity player;
-    private final ComponentMapper<PositionComponent> pcm;
     private PooledEngine engine;
 
+    private float xBound;
+    private float yBound;
     private float spawnInterval;
     private float timePast;
-    private float speed;
+    private float baseSpeed;
+    private final Random random;
 
-    public BulletSystem(TextureRegion region, Entity player) {
+    public MobSystem(TextureRegion region, Viewport viewport) {
         super(0);
         this.region = region;
-        this.player = player;
-        pcm = ComponentMapper.getFor(PositionComponent.class);
 
-        spawnInterval = 0.4f;
+        xBound = viewport.getWorldWidth();
+        yBound = viewport.getWorldHeight();
+        spawnInterval = 1.5f;
         timePast = 0f;
-        speed = 900f;
+        baseSpeed = 100f;
+        random = new Random();
     }
 
     @Override
@@ -41,28 +45,31 @@ public final class BulletSystem extends EntitySystem {
     public void update(float deltaTime) {
         timePast += deltaTime;
         if (timePast >= spawnInterval) {
-            PositionComponent playerPc = pcm.get(player);
-            spawnBullet(playerPc.x + 20, playerPc.y + 70);
+            float x = random.nextFloat() * (xBound - region.getRegionWidth() + 1);
+            float y = yBound;
+            float speed = baseSpeed + random.nextInt(100);
+
+            engine.addEntity(spawn(x, y, speed));
             timePast = 0f;
         }
     }
 
-    private void spawnBullet(float x, float y) {
-        final Entity bullet = engine.createEntity();
+    private Entity spawn(float x, float y, float speed) {
+        final Entity mob = engine.createEntity();
 
         final TextureComponent tc = engine.createComponent(TextureComponent.class);
         tc.region = region;
-        bullet.add(tc);
+        mob.add(tc);
 
         final PositionComponent pc = engine.createComponent(PositionComponent.class);
         pc.x = x;
         pc.y = y;
-        bullet.add(pc);
+        mob.add(pc);
 
         final VelocityComponent vc = engine.createComponent(VelocityComponent.class);
-        vc.y = speed;
-        bullet.add(vc);
+        vc.y = -speed;
+        mob.add(vc);
 
-        engine.addEntity(bullet);
+        return mob;
     }
 }

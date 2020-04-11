@@ -16,6 +16,7 @@ public final class MovementSystem extends EntitySystem {
     private Engine engine;
 
     public MovementSystem() {
+        super(2);
         family = Family.all(PositionComponent.class, VelocityComponent.class).get();
         pcm = ComponentMapper.getFor(PositionComponent.class);
         vcm = ComponentMapper.getFor(VelocityComponent.class);

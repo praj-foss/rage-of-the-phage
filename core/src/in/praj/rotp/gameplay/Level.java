@@ -15,6 +15,7 @@ import in.praj.rotp.gameplay.components.PositionComponent;
 import in.praj.rotp.gameplay.components.TextureComponent;
 import in.praj.rotp.gameplay.components.VelocityComponent;
 import in.praj.rotp.gameplay.systems.BulletSystem;
+import in.praj.rotp.gameplay.systems.MobSystem;
 import in.praj.rotp.gameplay.systems.MovementInputSystem;
 import in.praj.rotp.gameplay.systems.MovementSystem;
 import in.praj.rotp.gameplay.systems.RenderingSystem;
@@ -29,6 +30,7 @@ final class Level {
     // Systems
     private final MovementInputSystem movementInput;
     private final BulletSystem bulletSystem;
+    private final MobSystem mobSystem;
     private final List<EntitySystem> systems;
 
     Level(Assets assets, SpriteBatch batch, Viewport viewport) {
@@ -41,10 +43,12 @@ final class Level {
         // Systems
         movementInput = new MovementInputSystem(player);
         bulletSystem = new BulletSystem(assets.getBulletTexture(), player);
+        mobSystem = new MobSystem(assets.getVirusTexture(), viewport);
 
         systems = new ArrayList<>(3);
         systems.add(movementInput);
         systems.add(bulletSystem);
+        systems.add(mobSystem);
         systems.add(new MovementSystem());
         systems.add(new RenderingSystem(batch, viewport));
     }

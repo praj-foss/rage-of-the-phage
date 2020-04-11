@@ -13,19 +13,24 @@ import in.praj.rotp.gameplay.components.TextureComponent;
 
 public final class RenderingSystem extends EntitySystem {
     private final SpriteBatch batch;
-    private final Viewport viewport;
     private final Family family;
     private final ComponentMapper<TextureComponent> tcm;
     private final ComponentMapper<PositionComponent> pcm;
     private Engine engine;
 
+    private final float lowerBound;
+    private final float upperBound;
+
     public RenderingSystem(SpriteBatch batch, Viewport viewport) {
         super(10);
         this.batch = batch;
-        this.viewport = viewport;
         family = Family.all(TextureComponent.class, PositionComponent.class).get();
         tcm = ComponentMapper.getFor(TextureComponent.class);
         pcm = ComponentMapper.getFor(PositionComponent.class);
+
+        float offset = 8f;
+        lowerBound = 0f - offset;
+        upperBound = viewport.getWorldHeight() + offset;
     }
 
     @Override
@@ -37,10 +42,12 @@ public final class RenderingSystem extends EntitySystem {
     public void update(float deltaTime) {
         for (Entity e : engine.getEntitiesFor(family)) {
             PositionComponent pc = pcm.get(e);
+            TextureComponent tc = tcm.get(e);
 
-            if (pc.y >= 0 && pc.y <= viewport.getWorldHeight()) {
+            if (pc.y <= upperBound &&
+                    pc.y + tc.region.getRegionHeight() >= lowerBound) {
                 batch.begin();
-                batch.draw(tcm.get(e).region, pc.x, pc.y);
+                batch.draw(tc.region, pc.x, pc.y);
                 batch.end();
             } else {
                 // Out of bounds
