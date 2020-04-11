@@ -3,6 +3,7 @@ package in.praj.rotp.gameplay;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -13,10 +14,12 @@ import in.praj.rotp.core.Screens;
 
 public final class GameplayScreen extends AbstractScreen {
     private final Level level;
+    private Label scoreLabel;
+    private Label healthLabel;
 
     public GameplayScreen(Screens screens, Assets assets) {
         super(screens, assets);
-        level = new Level(assets, batch, screens.getViewport());
+        level = new Level(this, assets, batch, screens.getViewport());
     }
 
     @Override
@@ -30,14 +33,15 @@ public final class GameplayScreen extends AbstractScreen {
         stage.addActor(root);
 
         // Upper bar
-        root.add("Score").colspan(2).left();
+        scoreLabel = new Label(null, skin);
+        root.add(scoreLabel).colspan(2).left().padLeft(10);
         root.add(createButton("Back", screens::goBack));
         root.row();
         root.add().colspan(3).expand();
         root.row();
 
         // Buffs
-        root.add("Buffs").colspan(3);
+        root.add("No buffs").colspan(3);
         root.row();
 
         // Left button
@@ -57,7 +61,8 @@ public final class GameplayScreen extends AbstractScreen {
         root.add(leftButton);
 
         // Health
-        root.add("Health").expandX();
+        healthLabel = new Label(null, skin);
+        root.add(healthLabel).expandX();
 
         // Right button
         final Button rightButton = new TextButton("=>", skin);
@@ -95,5 +100,13 @@ public final class GameplayScreen extends AbstractScreen {
     @Override
     public void hide() {
         level.stop();
+    }
+
+    void updateScore(String score) {
+        this.scoreLabel.setText(score);
+    }
+
+    void updateHealth(int health) {
+        this.healthLabel.setText("Health: " + health);
     }
 }
