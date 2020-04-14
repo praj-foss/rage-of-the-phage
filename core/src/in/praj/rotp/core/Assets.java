@@ -1,23 +1,35 @@
 package in.praj.rotp.core;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Disposable;
 
 public final class Assets implements Disposable {
+    private final AssetManager manager;
+    private final TextureAtlas atlas;
     private final Skin skin;
+    private final Skin defaultSkin;
     private final TextureRegion playerTexture;
     private final TextureRegion bulletTexture;
     private final TextureRegion virusTexture;
 
     public Assets() {
-        skin = new Skin(Gdx.files.internal("skins/shade/uiskin.json"));
+        manager = new AssetManager();
+        manager.load("default.atlas", TextureAtlas.class);
+        manager.load("skins/shade/uiskin.json", Skin.class);
+        manager.load("default.json", Skin.class);
+        manager.finishLoading();
 
-        playerTexture = new TextureRegion(new Texture(Gdx.files.internal("Phage-idle.png")));
-        bulletTexture = new TextureRegion(new Texture(Gdx.files.internal("type-1.png")));
-        virusTexture = new TextureRegion(new Texture(Gdx.files.internal("Zika.png")));
+        skin = manager.get("skins/shade/uiskin.json", Skin.class);
+
+        atlas = manager.get("default.atlas", TextureAtlas.class);
+        defaultSkin = manager.get("default.json", Skin.class);
+
+        playerTexture = atlas.findRegion("phage-idle");
+        bulletTexture = atlas.findRegion("bullet-2");
+        virusTexture = atlas.findRegion("virus-zika");
     }
 
     public TextureRegion getSplashImage() {
@@ -41,11 +53,16 @@ public final class Assets implements Disposable {
         return skin;
     }
 
+    public Skin getDefaultSkin() {
+        return defaultSkin;
+    }
+
+    public TextureRegion getRegion(String name) {
+        return atlas.findRegion(name);
+    }
+
     @Override
     public void dispose() {
-        skin.dispose();
-        playerTexture.getTexture().dispose();
-        bulletTexture.getTexture().dispose();
-        virusTexture.getTexture().dispose();
+        manager.dispose();
     }
 }

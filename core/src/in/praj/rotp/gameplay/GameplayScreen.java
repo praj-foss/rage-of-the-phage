@@ -3,10 +3,14 @@ package in.praj.rotp.gameplay;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import in.praj.rotp.core.AbstractScreen;
 import in.praj.rotp.core.Assets;
@@ -41,7 +45,16 @@ public final class GameplayScreen extends AbstractScreen {
         root.row();
 
         // Buffs
-        root.add("No buffs").colspan(3);
+        final HorizontalGroup hg = new HorizontalGroup();
+        hg.space(8);
+        hg.pad(4);
+        hg.addActor(newBuffButton(skin2, "buff-thunder"));
+        hg.addActor(newBuffButton(skin2, "buff-2x"));
+        hg.addActor(newBuffButton(skin2, "buff-split"));
+        hg.addActor(newBuffButton(skin2, "buff-shield"));
+        hg.addActor(newBuffButton(skin2, null));
+        hg.addActor(newBuffButton(skin2, null));
+        root.add(hg).colspan(3);
         root.row();
 
         // Left button
@@ -62,7 +75,7 @@ public final class GameplayScreen extends AbstractScreen {
 
         // Health
         healthLabel = new Label(null, skin);
-        root.add(healthLabel).expandX();
+        root.add(healthLabel).expandX().height(32);
 
         // Right button
         final Button rightButton = new TextButton("=>", skin);
@@ -81,6 +94,18 @@ public final class GameplayScreen extends AbstractScreen {
         root.add(rightButton);
 
         return stage;
+    }
+
+    private ImageButton newBuffButton(Skin skin, String icon) {
+        final ImageButton btn = new ImageButton(
+                new ImageButton.ImageButtonStyle(
+                        skin.get(ImageButton.ImageButtonStyle.class)));
+        if (icon != null)
+            btn.getStyle().imageUp = new TextureRegionDrawable(assets.getRegion(icon));
+        else
+            btn.setDisabled(true);
+
+        return btn;
     }
 
     @Override

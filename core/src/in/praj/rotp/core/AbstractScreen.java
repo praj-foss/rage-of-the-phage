@@ -13,12 +13,16 @@ public abstract class AbstractScreen extends ScreenAdapter {
     protected final Screens screens;
     protected final SpriteBatch batch;
     protected final Skin skin;
+    protected final Skin skin2;
+    protected final Assets assets;
     protected final Stage stage;
 
     public AbstractScreen(Screens screens, Assets assets) {
         this.screens = screens;
         batch = screens.getSpriteBatch();
         skin = assets.getSkin();
+        skin2 = assets.getDefaultSkin();
+        this.assets = assets;
         stage = createStage();
     }
 

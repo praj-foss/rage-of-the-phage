@@ -1,0 +1,87 @@
+
+default.png
+size: 128,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+buff-2x
+  rotate: false
+  xy: 2, 12
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
+buff-disabled
+  rotate: false
+  xy: 86, 60
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
+buff-shield
+  rotate: false
+  xy: 52, 42
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
+buff-split
+  rotate: false
+  xy: 52, 60
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
+buff-thunder
+  rotate: false
+  xy: 52, 24
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
+bullet-1
+  rotate: false
+  xy: 2, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+bullet-2
+  rotate: false
+  xy: 12, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+button-down
+  rotate: false
+  xy: 102, 92
+  size: 16, 16
+  split: 4, 4, 5, 5
+  pad: 4, 4, 5, 5
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+button-up
+  rotate: false
+  xy: 102, 110
+  size: 16, 16
+  split: 4, 4, 4, 6
+  pad: 4, 4, 4, 6
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+phage-idle
+  rotate: false
+  xy: 2, 30
+  size: 48, 96
+  orig: 48, 96
+  offset: 0, 0
+  index: -1
+virus-zika
+  rotate: false
+  xy: 52, 78
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
