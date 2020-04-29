@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
@@ -33,13 +32,13 @@ public final class GameplayScreen extends AbstractScreen {
         // Root container
         final Table root = new Table(skin);
         root.setFillParent(true);
-        root.debug();
+//        root.debug();
         stage.addActor(root);
 
         // Upper bar
         scoreLabel = new Label(null, skin);
         root.add(scoreLabel).colspan(2).left().padLeft(10);
-        root.add(createButton("Back", screens::goBack));
+        root.add(createButton("<<", screens::goBack));
         root.row();
         root.add().colspan(3).expand();
         root.row();
@@ -58,7 +57,7 @@ public final class GameplayScreen extends AbstractScreen {
         root.row();
 
         // Left button
-        final Button leftButton = new TextButton("<=", skin);
+        final Button leftButton = newBuffButton(skin2, "move-left");
         leftButton.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -71,14 +70,14 @@ public final class GameplayScreen extends AbstractScreen {
                 level.leftButtonUp();
             }
         });
-        root.add(leftButton);
+        root.padBottom(4).add(leftButton).padLeft(4);
 
         // Health
         healthLabel = new Label(null, skin);
         root.add(healthLabel).expandX().height(32);
 
         // Right button
-        final Button rightButton = new TextButton("=>", skin);
+        final Button rightButton = newBuffButton(skin2, "move-right");
         rightButton.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -91,7 +90,7 @@ public final class GameplayScreen extends AbstractScreen {
                 level.rightButtonUp();
             }
         });
-        root.add(rightButton);
+        root.add(rightButton).padRight(4);
 
         return stage;
     }

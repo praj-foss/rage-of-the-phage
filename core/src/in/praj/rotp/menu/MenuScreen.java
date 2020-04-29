@@ -19,7 +19,7 @@ public final class MenuScreen extends AbstractScreen {
         // Root container
         final Table root = new Table(skin);
         root.setFillParent(true);
-        root.pad(100).debug();
+        root.pad(48);
         root.defaults()
                 .expandX()
                 .fillX()

@@ -1,23 +1,36 @@
 {
-com.badlogic.gdx.graphics.Color: {
-	RGBA_246_219_186_255: {
-		r: 0.9647059
-		g: 0.85882354
-		b: 0.7294118
-		a: 1
+	Color: {
+		light-0: {
+			r: 0.9647059
+			g: 0.85882354
+			b: 0.7294118
+			a: 1
+		}
+		dark-1: {
+			r: 0.1921569
+			g: 0.4862745
+			b: 0.5294118
+			a: 1
+		}
 	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-	default: {
-		up: button-up
-		down: button-down
-		disabled: button-up
+	ButtonStyle: {
+		default: {
+			up: button-up
+			down: button-down
+			disabled: button-up
+		}
 	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
-	default: {
-		parent: default
-		imageDisabled: buff-disabled
+	ImageButtonStyle: {
+		default: {
+			parent: default
+			imageDisabled: buff-disabled
+		}
 	}
-}
+	TextButtonStyle: {
+		default: {
+			parent: default
+			font: font-0
+			fontColor: light-0
+		}
+	}
 }

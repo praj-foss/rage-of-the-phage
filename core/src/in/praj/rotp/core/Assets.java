@@ -1,6 +1,7 @@
 package in.praj.rotp.core;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -17,15 +18,16 @@ public final class Assets implements Disposable {
 
     public Assets() {
         manager = new AssetManager();
-        manager.load("default.atlas", TextureAtlas.class);
         manager.load("skins/shade/uiskin.json", Skin.class);
-        manager.load("default.json", Skin.class);
+        manager.load("default.atlas", TextureAtlas.class);
+        manager.load("fonts/fatpixel-24.fnt", BitmapFont.class);
         manager.finishLoading();
 
         skin = manager.get("skins/shade/uiskin.json", Skin.class);
-
         atlas = manager.get("default.atlas", TextureAtlas.class);
-        defaultSkin = manager.get("default.json", Skin.class);
+        BitmapFont font = manager.get("fonts/fatpixel-24.fnt");
+
+        defaultSkin = new DefaultSkin(atlas, font);
 
         playerTexture = atlas.findRegion("phage-idle");
         bulletTexture = atlas.findRegion("bullet-2");
@@ -63,6 +65,7 @@ public final class Assets implements Disposable {
 
     @Override
     public void dispose() {
+        defaultSkin.dispose();
         manager.dispose();
     }
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.DistanceFieldFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -41,7 +42,8 @@ public final class Screens implements Disposable {
 
     public Screens(Game game, Assets assets) {
         this.game = game;
-        spriteBatch = new SpriteBatch();
+        spriteBatch = new SpriteBatch(1000, DistanceFieldFont.createDistanceFieldShader());
+//        spriteBatch = new SpriteBatch();
         viewport = new FitViewport(288, 512);
 
         history = new Stack<>();
@@ -104,7 +106,7 @@ public final class Screens implements Disposable {
     }
 
     public void clear() {
-        Gdx.gl20.glClearColor(0, 0, 0, 0);
+        Gdx.gl20.glClearColor(49/255f, 124/255f, 135/255f, 1f);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
