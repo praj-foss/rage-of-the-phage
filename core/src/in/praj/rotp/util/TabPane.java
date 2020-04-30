@@ -42,7 +42,7 @@ public final class TabPane {
 
     public void on(Table table) {
         for (Tab tab : tabs)
-            table.add(tab.getHead()).fillX();
+            table.add(tab.getHead()).uniform().fillX();
         table.row();
         table.add(content).colspan(tabs.size()).expandY().fill();
         content.setActor(tabs.get(0).getBody());

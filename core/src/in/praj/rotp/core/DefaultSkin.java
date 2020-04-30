@@ -21,22 +21,26 @@ public final class DefaultSkin extends Skin {
     public static final String COLOR_LIGHT_0 = "light-0";
     public static final String COLOR_DARK_1  = "dark-1";
 
-    DefaultSkin(TextureAtlas atlas, BitmapFont font, BitmapFont sub) {
+    DefaultSkin(TextureAtlas atlas, BitmapFont large, BitmapFont medium) {
         super(atlas);
 
-        setupFonts(font, sub);
+        setupFonts(large, medium);
         setupColors();
         setupButtons();
         setupTabs();
         setupLabels();
     }
 
-    private void setupFonts(BitmapFont font, BitmapFont s) {
-        final DistanceFieldFont dff =
-                new DistanceFieldFont(font.getData(), font.getRegion(), false);
-        dff.setDistanceFieldSmoothing(4f);
-        add(STYLE_DEFAULT, dff, BitmapFont.class);
-        add(STYLE_TABS, s);
+    private void setupFonts(BitmapFont large, BitmapFont medium) {
+        final DistanceFieldFont dffLarge =
+                new DistanceFieldFont(large.getData(), large.getRegion(), true);
+        dffLarge.setDistanceFieldSmoothing(4f);
+        add(STYLE_DEFAULT, dffLarge, BitmapFont.class);
+
+        final DistanceFieldFont dffMedium =
+                new DistanceFieldFont(medium.getData(), medium.getRegion(), true);
+        dffMedium.setDistanceFieldSmoothing(4f);
+        add(STYLE_TABS, dffMedium, BitmapFont.class);
     }
 
     private void setupColors() {

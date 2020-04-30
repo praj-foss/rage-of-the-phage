@@ -43,7 +43,6 @@ public final class Screens implements Disposable {
     public Screens(Game game, Assets assets) {
         this.game = game;
         spriteBatch = new SpriteBatch(1000, DistanceFieldFont.createDistanceFieldShader());
-//        spriteBatch = new SpriteBatch();
         viewport = new FitViewport(288, 512);
 
         history = new Stack<>();

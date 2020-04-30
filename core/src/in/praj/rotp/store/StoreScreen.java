@@ -22,7 +22,7 @@ public final class StoreScreen extends AbstractScreen {
         // Root container
         final Table root = new Table(skin);
         root.setFillParent(true);
-        root.pad(50).debug();
+        root.pad(50);
         root.defaults().expandX();
         stage.addActor(root);
 

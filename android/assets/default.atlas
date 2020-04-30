@@ -1,61 +1,75 @@
 
 default.png
-size: 256,128
+size: 2048,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+Bonk-24
+  rotate: false
+  xy: 516, 159
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+Bonk-36
+  rotate: false
+  xy: 2, 159
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
 buff-2x
   rotate: false
-  xy: 102, 105
+  xy: 1030, 605
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 buff-disabled
   rotate: false
-  xy: 52, 14
+  xy: 102, 141
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 buff-shield
   rotate: false
-  xy: 102, 87
+  xy: 2, 20
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 buff-split
   rotate: false
-  xy: 52, 32
+  xy: 1080, 655
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 buff-thunder
   rotate: false
-  xy: 136, 105
+  xy: 52, 118
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 bullet-1
   rotate: false
-  xy: 86, 40
+  xy: 1064, 613
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 bullet-2
   rotate: false
-  xy: 52, 4
+  xy: 36, 28
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 button-down
   rotate: false
-  xy: 102, 51
+  xy: 2, 2
   size: 16, 16
   split: 4, 4, 5, 5
   pad: 4, 4, 5, 5
@@ -64,7 +78,7 @@ button-down
   index: -1
 button-up
   rotate: false
-  xy: 170, 105
+  xy: 1114, 655
   size: 16, 16
   split: 4, 4, 4, 6
   pad: 4, 4, 4, 6
@@ -73,28 +87,28 @@ button-up
   index: -1
 move-left
   rotate: false
-  xy: 2, 2
+  xy: 2, 38
   size: 48, 21
   orig: 48, 21
   offset: 0, 0
   index: -1
 move-right
   rotate: false
-  xy: 52, 50
+  xy: 52, 136
   size: 48, 21
   orig: 48, 21
   offset: 0, 0
   index: -1
 phage-idle
   rotate: false
-  xy: 2, 25
+  xy: 2, 61
   size: 48, 96
   orig: 48, 96
   offset: 0, 0
   index: -1
 tab-active
   rotate: false
-  xy: 120, 69
+  xy: 52, 100
   size: 16, 16
   split: 4, 4, 4, 2
   pad: 4, 4, 4, 2
@@ -103,7 +117,7 @@ tab-active
   index: -1
 tab-content
   rotate: false
-  xy: 102, 69
+  xy: 1030, 587
   size: 16, 16
   split: 4, 4, 2, 6
   pad: 4, 4, 2, 6
@@ -112,7 +126,7 @@ tab-content
   index: -1
 tab-inactive
   rotate: false
-  xy: 136, 87
+  xy: 1080, 637
   size: 16, 16
   split: 4, 4, 4, 2
   pad: 4, 4, 4, 2
@@ -121,7 +135,7 @@ tab-inactive
   index: -1
 virus-zika
   rotate: false
-  xy: 52, 73
+  xy: 1030, 623
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
