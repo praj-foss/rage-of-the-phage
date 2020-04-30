@@ -13,7 +13,6 @@ public abstract class AbstractScreen extends ScreenAdapter {
     protected final Screens screens;
     protected final SpriteBatch batch;
     protected final Skin skin;
-    protected final Skin skin2;
     protected final Assets assets;
     protected final Stage stage;
 
@@ -21,7 +20,6 @@ public abstract class AbstractScreen extends ScreenAdapter {
         this.screens = screens;
         batch = screens.getSpriteBatch();
         skin = assets.getSkin();
-        skin2 = assets.getDefaultSkin();
         this.assets = assets;
         stage = createStage();
     }
@@ -29,7 +27,7 @@ public abstract class AbstractScreen extends ScreenAdapter {
     protected abstract Stage createStage();
 
     protected TextButton createButton(String text, Runnable onClick) {
-        final TextButton btn = new TextButton(text, skin2);
+        final TextButton btn = new TextButton(text, skin);
         btn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

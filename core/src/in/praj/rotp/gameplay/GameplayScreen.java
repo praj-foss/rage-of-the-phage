@@ -32,7 +32,7 @@ public final class GameplayScreen extends AbstractScreen {
         // Root container
         final Table root = new Table(skin);
         root.setFillParent(true);
-//        root.debug();
+        root.debug();
         stage.addActor(root);
 
         // Upper bar
@@ -47,17 +47,17 @@ public final class GameplayScreen extends AbstractScreen {
         final HorizontalGroup hg = new HorizontalGroup();
         hg.space(8);
         hg.pad(4);
-        hg.addActor(newBuffButton(skin2, "buff-thunder"));
-        hg.addActor(newBuffButton(skin2, "buff-2x"));
-        hg.addActor(newBuffButton(skin2, "buff-split"));
-        hg.addActor(newBuffButton(skin2, "buff-shield"));
-        hg.addActor(newBuffButton(skin2, null));
-        hg.addActor(newBuffButton(skin2, null));
+        hg.addActor(newBuffButton(skin, "buff-thunder"));
+        hg.addActor(newBuffButton(skin, "buff-2x"));
+        hg.addActor(newBuffButton(skin, "buff-split"));
+        hg.addActor(newBuffButton(skin, "buff-shield"));
+        hg.addActor(newBuffButton(skin, null));
+        hg.addActor(newBuffButton(skin, null));
         root.add(hg).colspan(3);
         root.row();
 
         // Left button
-        final Button leftButton = newBuffButton(skin2, "move-left");
+        final Button leftButton = newBuffButton(skin, "move-left");
         leftButton.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -77,7 +77,7 @@ public final class GameplayScreen extends AbstractScreen {
         root.add(healthLabel).expandX().height(32);
 
         // Right button
-        final Button rightButton = newBuffButton(skin2, "move-right");
+        final Button rightButton = newBuffButton(skin, "move-right");
         rightButton.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

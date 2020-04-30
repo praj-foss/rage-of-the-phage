@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import in.praj.rotp.core.DefaultSkin;
+
 public final class Tab {
     private final Skin skin;
     private final Button head;
@@ -55,7 +57,8 @@ public final class Tab {
         }
 
         public Builder head(String text) {
-            head = new TextButton(text, skin);
+            head = new TextButton(text,
+                    skin.get(DefaultSkin.STYLE_TABS, TextButton.TextButtonStyle.class));
             return this;
         }
 

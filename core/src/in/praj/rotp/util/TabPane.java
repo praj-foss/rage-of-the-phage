@@ -1,6 +1,8 @@
 package in.praj.rotp.util;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -9,16 +11,26 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.praj.rotp.core.DefaultSkin;
+
 public final class TabPane {
     private final Skin skin;
     private final List<Tab> tabs;
     private final ScrollPane content;
+    private final ButtonGroup<Button> tabGroup;
 
     private TabPane(Builder builder) {
         skin = builder.skin;
         tabs = builder.tabs;
-        content = new ScrollPane(null, skin);
+        content = new ScrollPane(null,
+                skin.get(DefaultSkin.STYLE_TABS, ScrollPane.ScrollPaneStyle.class));
+
+        tabGroup = new ButtonGroup<>();
+        tabGroup.setMaxCheckCount(1);
+        tabGroup.setMinCheckCount(1);
+
         for (Tab tab: tabs) {
+            tabGroup.add(tab.getHead());
             tab.getHead().addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
