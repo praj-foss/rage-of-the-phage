@@ -15,6 +15,7 @@ import in.praj.rotp.gameplay.components.MovementInputComponent;
 import in.praj.rotp.gameplay.components.PositionComponent;
 import in.praj.rotp.gameplay.components.TextureComponent;
 import in.praj.rotp.gameplay.components.VelocityComponent;
+import in.praj.rotp.gameplay.systems.AnimationSystem;
 import in.praj.rotp.gameplay.systems.BulletSystem;
 import in.praj.rotp.gameplay.systems.MobSystem;
 import in.praj.rotp.gameplay.systems.MovementInputSystem;
@@ -46,11 +47,11 @@ public final class Level {
         player = engine.createEntity();
 
         // Systems
-        movementInput = new MovementInputSystem(player);
+        movementInput = new MovementInputSystem(player, assets);
         bulletSystem = new BulletSystem(assets.getBulletTexture(), player);
         mobSystem = new MobSystem(assets.getVirusTexture(), viewport);
 
-        systems = new ArrayList<>(7);
+        systems = new ArrayList<>();
         systems.add(movementInput);
         systems.add(bulletSystem);
         systems.add(mobSystem);
@@ -58,6 +59,7 @@ public final class Level {
         systems.add(new RenderingSystem(batch, viewport));
         systems.add(new StatusSystem(this, player));
         systems.add(new PhysicsSystem());
+        systems.add(new AnimationSystem());
     }
 
     void start() {
@@ -78,7 +80,7 @@ public final class Level {
 
         // Position
         final PositionComponent pc = engine.createComponent(PositionComponent.class);
-        pc.y = 50;
+        pc.y = 72;
         player.add(pc);
 
         // Velocity

@@ -2,6 +2,7 @@ package in.praj.rotp.core;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.BitmapFontLoader;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -17,6 +18,9 @@ public final class Assets implements Disposable {
     private final TextureAtlas atlas;
     private final Skin skin;
     private final TextureRegion playerTexture;
+//    private final TextureRegion playerRunTexture;
+    private final Animation<TextureRegion> playerRunRightAnimation;
+    private final Animation<TextureRegion> playerRunLeftAnimation;
     private final TextureRegion bulletTexture;
     private final TextureRegion virusTexture;
 
@@ -36,14 +40,26 @@ public final class Assets implements Disposable {
                 atlas, manager.get(FONT_LARGE), manager.get(FONT_MEDIUM)
         );
 
-        playerTexture = atlas.findRegion("phage-idle");
+        playerTexture = atlas.findRegion("phage3-idle");
+//        playerRunTexture = atlas.findRegion("phage3-run");
         bulletTexture = atlas.findRegion("bullet-2");
         virusTexture = atlas.findRegion("virus-zika");
+
+        playerRunRightAnimation = new Animation<>(0.04f, atlas.findRegions("run"), Animation.PlayMode.LOOP);
+        playerRunLeftAnimation = new Animation<>(0.04f, atlas.findRegions("run"), Animation.PlayMode.REVERSED);
     }
 
     public TextureRegion getSplashImage() {
         // TODO: Implement this
         return null;
+    }
+
+    public Animation<TextureRegion> getPlayerRunRightAnimation() {
+        return playerRunRightAnimation;
+    }
+
+    public Animation<TextureRegion> getPlayerRunLeftAnimation() {
+        return playerRunLeftAnimation;
     }
 
     public TextureRegion getPlayerTexture() {

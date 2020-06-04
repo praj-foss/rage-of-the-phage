@@ -32,7 +32,6 @@ public final class GameplayScreen extends AbstractScreen {
         // Root container
         final Table root = new Table(skin);
         root.setFillParent(true);
-        root.debug();
         stage.addActor(root);
 
         // Upper bar
